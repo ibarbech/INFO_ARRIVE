@@ -1,0 +1,156 @@
+
+body {
+    height: calc(100% - 80px);
+}
+
+@media (min-width: 731px) {
+    body {
+        height: calc(100% - 128px);
+    }
+}
+
+#description h1{
+    margin: 0;
+    text-align: center;
+    font-size: 25px;
+    padding: 0 10px;
+}
+
+#routesContainer{
+    margin: auto;
+    padding: 10px 20px 10px 20px;
+    max-width: 1025px;
+}
+
+#routesContainer p{
+    text-align: center;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+#info {
+    padding-top: 15px;
+}
+
+#infoMonument {
+    margin-bottom: 0;
+}
+
+/*
+Selector
+ */
+
+@media (min-width: 731px) {
+    #selector{
+        display: block;
+    }
+}
+
+@media (max-width: 730px) {
+    #selector{
+        display: none;
+    }
+}
+
+#selector{
+    z-index: 9999;
+    margin-top: 80px;
+    margin-bottom: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #4CAF50;
+}
+
+#selector ul {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding: 0;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    border-top: 1px solid #bbb;;
+}
+
+@media (min-width: 731px){
+    #selector li{
+        float: left;
+    }
+}
+
+#selector li {
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;;
+}
+
+#selector li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#selector li a:hover:not(.active) {
+    background-color: #DE6461;
+}
+
+.active {
+    background-color: #91221F;
+}
+
+#infoRoute {
+    margin: 10px 0 0 10px;
+}
+
+#infoRoute a{
+    color: white;
+}
+
+/*
+Map
+ */
+
+#contentMap{
+    height: calc(100% - 85px);
+    width: 100%;
+    margin: auto;
+}
+
+#map{
+    height: 100%;
+}
+
+#mapButtonSection{
+    z-index: 9999;
+    display: inline-block;
+    margin-left: calc(50% - 55px);
+    padding: 10px;
+}
+
+.button{
+    border-radius: 15px;
+    border-width: 0;
+    background-color: #91221F;
+    color: white;
+}
+
+/* Info Window */
+
+.infoWindow h1{
+    font-size: 150%;
+}
+
+.infoWindow h2{
+    font-size: 125%;
+}
+
+/* Slider */
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
