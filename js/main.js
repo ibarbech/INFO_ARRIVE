@@ -62,6 +62,7 @@ function getAndProcessData(location, cur_uri) {
 			}
 		},
 		success : function(data) {
+			console.log(data);
 			//processRoutes(data);
 			processData(data,cur_uri);
 			console.log("Correcto");
