@@ -1,4 +1,5 @@
-var endpointCC = "http://opendata.caceres.es/sparql/";
+// var endpointCC = "http://opendata.caceres.es/sparql/";
+var endpointCC = "https://opendata.unex.es/sparql"
 var queryGraph = "";
 
 var routes = {};
@@ -24,7 +25,30 @@ function getAndProcessData(location, cur_uri) {
 	var radius = parseInt(y.value) / 1000;
 	var cur_lat = location.lat();
 	var cur_long = location.lng();
-	var sparqlQuery = "SELECT ?name ?label ?tipoAparcamiento ?nombre_via ?tipo_via  ?geo_long ?geo_lat ?distance WHERE {   {     select ?name ?label ?tipoAparcamiento ?nombre_via ?tipo_via ?geo_long ?geo_lat min((bif:st_distance(bif:st_point(?geo_lat,?geo_long),bif:st_point( " + cur_lat + ", " +cur_long + " )))) AS ?distance     where{ " +          ?URI a " + cur_uri + ".           ?URI geo:lat ?geo_lat.           ?URI geo:long ?geo_long.           OPTIONAL {?URI foaf:name ?name. }           OPTIONAL {?URI rdfs:label ?label. }           OPTIONAL {?URI om:tipoAparcamiento ?tipoAparcamiento. }           OPTIONAL {?URI om:situadoEnVia ?uri_via.                               ?uri_via rdfs:label ?nombre_via.                               ?uri_via om:tipoVia ?tipo_via.                               }     }     ORDER BY ASC(?distance)   }   FILTER (?distance < " + radius + ") } "
+	var sparqlQuery = "prefix gtfs: <http://vocab.gtfs.org/terms#> select * where { " +
+	"service <http://opendata.caceres.es/sparql> { " +
+	"SELECT ?name ?label ?tipoAparcamiento ?nombre_via ?tipo_via  ?geo_long ?geo_lat ?distance " +
+	"WHERE { " +
+	"  { " +
+	"    select ?name ?label ?tipoAparcamiento ?nombre_via ?tipo_via ?geo_long ?geo_lat min((bif:st_distance(bif:st_point(?geo_lat,?geo_long),bif:st_point( " + cur_lat + ", " +cur_long + " )))) AS ?distance " +
+	"    where{ " +
+	"          ?URI a " + cur_uri + ". " +
+	"          ?URI geo:lat ?geo_lat. " +
+	"          ?URI geo:long ?geo_long. " +
+	"          OPTIONAL {?URI foaf:name ?name. } " +
+	"          OPTIONAL {?URI rdfs:label ?label. } " +
+	"          OPTIONAL {?URI om:tipoAparcamiento ?tipoAparcamiento. } " +
+	"          OPTIONAL {?URI om:situadoEnVia ?uri_via. " +
+	"                              ?uri_via rdfs:label ?nombre_via. " +
+	"                              ?uri_via om:tipoVia ?tipo_via. " +
+	"                              } " +
+	"    } " +
+	"    ORDER BY ASC(?distance) " +
+	"  } " +
+	"  FILTER (?distance < " + radius + ") " +
+	"} " +
+	"} " +
+	"} "
 
 	console.log(sparqlQuery);
 
@@ -43,7 +67,6 @@ function getAndProcessData(location, cur_uri) {
 			}
 		},
 		success : function(data) {
-			console.log(data);
 			//processRoutes(data);
 			processData(data,cur_uri);
 			console.log("Correcto");
